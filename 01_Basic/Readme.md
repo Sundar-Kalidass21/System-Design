@@ -1,10 +1,10 @@
-# System Design – Feature Learning (Zero to Hero)
+# System Design – Feature Learning (Complete)
 
-This document is written for deep, feature-level learning of system design.
-Each concept follows a strict structure:
-- About the Topic (minimum 5 lines)
-- Key Points (minimum 5 bullets)
-- Example (minimum 5 lines)
+This document covers **Sections 1–7** with **all requested topics**.
+Each topic includes:
+- About the Topic (≈5 lines)
+- Key Points (bullets)
+- Example (≈5 lines)
 
 ---
 
@@ -12,301 +12,1004 @@ Each concept follows a strict structure:
 
 ### Client–Server
 **About the Topic**  
-The client–server model is the foundation of most modern software systems. The client is responsible for user interaction and presentation, while the server handles business logic, validation, security, and database access. This separation improves maintainability by keeping responsibilities clear. It also enhances security by preventing direct access to sensitive resources. Clients and servers can scale independently as usage grows.
+Client–server architecture separates user-facing components from backend logic. The client handles UI and sends requests. The server processes requests, applies business rules, and manages data. This separation improves security and maintainability. It is the foundation of most web and mobile systems.
 
 **Key Points**
-- Client handles UI and user input  
-- Server manages business logic and data  
-- Clear separation of responsibilities  
-- Centralized security and validation  
-- Independent scalability  
+- Client handles presentation
+- Server handles logic and data
+- Improves security
+- Centralized control
+- Independent scaling
 
 **Example**  
-A mobile app sends a request to fetch user profile data.  
-The backend server validates the authentication token.  
-It retrieves user data from the database.  
-The response is formatted and sent back to the client.  
-The database is never accessed directly by the client.
+A mobile app requests user details.  
+The server authenticates the user.  
+Data is fetched from the database.  
+Response is formatted.  
+Client renders the UI.
 
 ---
 
 ### Scaling
 **About the Topic**  
-Scaling is the ability of a system to handle increased traffic, users, or data without performance degradation. Systems that do not scale properly fail under growth. Scaling must be planned during design, not after failures occur. It directly affects availability and performance. Proper scaling enables long-term system success.
+Scaling is the ability to handle growth in traffic and users. Systems must scale to avoid performance degradation. Scaling decisions are architectural. Poor scaling causes outages. There are vertical and horizontal approaches.
 
 **Key Points**
-- Handles growth in users and traffic  
-- Prevents performance bottlenecks  
-- Planned during design phase  
-- Impacts availability  
-- Essential for long-term systems  
+- Handles growth
+- Prevents overload
+- Architectural concern
+- Impacts availability
+- Essential for success
 
 **Example**  
-An application starts with a small number of users.  
-As traffic increases, response times slow down.  
-Engineers analyze system load.  
-Scaling strategies are applied.  
-The system continues working smoothly under growth.
+Traffic increases daily.  
+Response time slows down.  
+Scaling strategy is applied.  
+System handles more load.  
+Users see stable performance.
 
 ---
 
-### Vertical Scaling (Scale Up)
+### Vertical Scaling
 **About the Topic**  
-Vertical scaling increases the capacity of a single machine by upgrading CPU, RAM, or storage. It is easy to implement because no architectural changes are required. However, hardware limitations restrict growth. Vertical scaling introduces a single point of failure. It is usually a short-term solution.
+Vertical scaling increases resources of a single server. This includes RAM, CPU, or storage. It is easy to implement. Hardware limits restrict growth. It creates a single point of failure.
 
 **Key Points**
-- Upgrades a single server  
-- Simple to implement  
-- Limited by hardware  
-- Expensive at scale  
-- Single point of failure  
+- Upgrade one server
+- Easy setup
+- Hardware limit
+- Expensive
+- SPOF risk
 
 **Example**  
-A backend server runs with 8GB RAM.  
-Traffic increases and performance degrades.  
-The server is upgraded to 32GB RAM.  
+Server has 8GB RAM.  
+Traffic increases.  
+RAM upgraded to 32GB.  
 Performance improves temporarily.  
-Further growth requires a new approach.
+Further growth becomes impossible.
 
 ---
 
-### Horizontal Scaling (Scale Out)
+### Horizontal Scaling
 **About the Topic**  
-Horizontal scaling increases capacity by adding more machines instead of upgrading one. Load is distributed across servers to prevent overload. This improves fault tolerance and availability. Horizontal scaling supports large-scale systems. It is widely used in cloud environments.
+Horizontal scaling adds more servers. Load is distributed across machines. This improves fault tolerance. It supports large systems. Common in cloud setups.
 
 **Key Points**
-- Adds more servers  
-- Improves fault tolerance  
-- Handles high traffic  
-- Requires load balancing  
-- Cloud-friendly approach  
+- Add servers
+- Fault tolerant
+- High scalability
+- Needs load balancer
+- Cloud friendly
 
 **Example**  
-An e-commerce platform adds multiple backend servers.  
-A load balancer distributes incoming requests.  
-One server fails during peak traffic.  
-Other servers continue serving users.  
-No downtime is experienced.
+Multiple servers are added.  
+Requests are distributed.  
+One server fails.  
+Others handle traffic.  
+System stays online.
 
 ---
 
 ### Load Balancer
 **About the Topic**  
-A load balancer distributes incoming requests across backend servers. It prevents any single server from becoming overloaded. Load balancers monitor server health. Unhealthy servers are removed automatically. This improves system reliability and availability.
+Load balancers distribute incoming requests across servers. They prevent overload. Health checks detect failures. Traffic is routed dynamically. They are critical for horizontal scaling.
 
 **Key Points**
-- Distributes traffic evenly  
-- Prevents server overload  
-- Improves availability  
-- Enables horizontal scaling  
-- Performs health checks  
+- Traffic distribution
+- Health checks
+- High availability
+- Fault tolerance
+- Enables scaling
 
 **Example**  
-Thousands of users access a website simultaneously.  
-Requests first reach the load balancer.  
-Traffic is routed to healthy servers.  
-One server becomes unhealthy and is removed.  
-Users continue using the site without issues.
+Requests hit load balancer.  
+Servers receive balanced traffic.  
+One server crashes.  
+Traffic rerouted automatically.  
+Users notice no failure.
 
 ---
 
 ### Database
 **About the Topic**  
-A database stores application data persistently. It supports create, read, update, and delete operations. Databases ensure consistency and durability of data. They often become performance bottlenecks at scale. Proper design and scaling are critical.
+Databases store persistent data. They support queries and transactions. Databases ensure consistency. They can become bottlenecks. Scaling strategies are required.
 
 **Key Points**
-- Persistent data storage  
-- Supports transactions  
-- Ensures consistency  
-- Performance sensitive  
-- Requires scaling strategies  
+- Persistent storage
+- Transactions
+- Consistency
+- Performance sensitive
+- Needs scaling
 
 **Example**  
-An application stores users and orders in a database.  
-Traffic increases and queries slow down.  
-Indexes and replicas are added.  
-Performance improves significantly.  
-The system remains reliable.
+User data stored in DB.  
+Traffic increases.  
+Queries slow down.  
+Indexes added.  
+Performance improves.
 
 ---
 
 ### Database Sharding
 **About the Topic**  
-Database sharding splits data across multiple databases. Each shard stores a subset of data. This improves write scalability. It reduces load on individual databases. Sharding increases operational complexity.
+Sharding splits data across databases. Each shard stores a subset. This improves write scalability. Complexity increases. Shard key choice is critical.
 
 **Key Points**
-- Splits data across shards  
-- Improves write scalability  
-- Reduces single DB load  
-- Requires shard key design  
-- Adds complexity  
+- Split data
+- Write scalability
+- Reduced load
+- Complex queries
+- Shard key needed
 
 **Example**  
-User data is split by user ID range.  
-Writes are distributed across shards.  
-No single database is overloaded.  
-Queries route to correct shard.  
-The system scales efficiently.
+Users split by ID.  
+Writes distributed.  
+No DB overloaded.  
+Queries routed correctly.  
+System scales.
 
 ---
 
 ### Database Replication
 **About the Topic**  
-Database replication copies data from a primary database to replicas. Writes go to the primary database. Reads are served from replicas. This improves read performance and availability. Replication may introduce slight data lag.
+Replication copies data to replicas. Writes go to primary. Reads go to replicas. Improves availability. May cause lag.
 
 **Key Points**
-- Primary handles writes  
-- Replicas handle reads  
-- Improves availability  
-- Supports failover  
-- Possible replication lag  
+- Primary writes
+- Replica reads
+- High availability
+- Failover support
+- Replication lag
 
 **Example**  
-Orders are written to the primary database.  
-Product browsing uses replicas.  
-Primary database fails temporarily.  
-Replicas continue serving reads.  
-Users can still browse products.
+Orders written to primary.  
+Reads from replicas.  
+Primary goes down.  
+Reads still work.  
+System partially available.
 
 ---
 
 ### Object Storage
 **About the Topic**  
-Object storage stores unstructured data such as images and videos. It is optimized for scalability and durability. Files are accessed using URLs. Databases store only references. This keeps databases efficient.
+Object storage holds unstructured data. Used for images and videos. Scales independently. DB stores only URLs. Reduces DB load.
 
 **Key Points**
-- Stores unstructured data  
-- Highly scalable  
-- Cost-effective  
-- URL-based access  
-- Database stores references  
+- Unstructured data
+- Scalable
+- Cost efficient
+- URL based
+- DB lightweight
 
 **Example**  
-A user uploads a profile image.  
-The image is stored in object storage.  
-The database saves the image URL.  
-The app loads the image from storage.  
-Database load remains low.
+User uploads image.  
+Image stored in object storage.  
+URL saved in DB.  
+Client loads image.  
+DB remains fast.
 
 ---
 
 ### Cache
 **About the Topic**  
-Cache stores frequently accessed data in memory. It significantly improves response time. Cache reduces database load. Cached data is temporary and may expire. Eviction policies manage memory usage.
+Cache stores frequently accessed data in memory. It reduces DB calls. Improves latency. Data is temporary. Eviction policies apply.
 
 **Key Points**
-- Fast access  
-- Reduces DB load  
-- Temporary storage  
-- Improves performance  
-- Uses eviction policies  
+- Fast access
+- DB offload
+- Temporary data
+- Improves latency
+- Uses eviction
 
 **Example**  
-Popular product details are cached.  
-Requests are served instantly.  
-Cache expires after some time.  
-Data reloads from database.  
-Cache is refreshed automatically.
+Product data cached.  
+Requests served instantly.  
+Cache expires.  
+Data reloads from DB.  
+Cache refreshed.
 
 ---
 
 ### CDN
 **About the Topic**  
-A CDN distributes static content globally. Content is served from locations close to users. This reduces latency and page load time. CDNs offload backend servers. They improve global performance.
+CDN distributes static content globally. Content served closer to users. Reduces latency. Offloads backend. Improves UX.
 
 **Key Points**
-- Global content delivery  
-- Reduced latency  
-- Static file optimization  
-- Backend offloading  
-- High availability  
+- Global delivery
+- Low latency
+- Static content
+- Backend offload
+- High availability
 
 **Example**  
-Images are served from nearby CDN nodes.  
-Users experience faster load times.  
-Backend servers handle APIs only.  
-Traffic is reduced on origin servers.  
-Performance improves worldwide.
+Images served via CDN.  
+User loads page faster.  
+Backend handles APIs.  
+Traffic reduced.  
+Performance improves.
 
 ---
 
 ### Monolithic Architecture
 **About the Topic**  
-Monolithic architecture builds all features into a single application. It is easy to start development. Scaling individual components is difficult. Failures affect the entire system. Maintenance becomes harder as complexity grows.
+Monoliths combine all features in one app. Easy to start. Hard to scale parts. Failures affect entire system. Becomes complex.
 
 **Key Points**
-- Single codebase  
-- Easy initial development  
-- Tight coupling  
-- Hard to scale parts  
-- High failure impact  
+- Single codebase
+- Easy initially
+- Tight coupling
+- Hard scaling
+- High risk
 
 **Example**  
-One application handles login, orders, and payments.  
-Payment traffic increases suddenly.  
-Entire application must be scaled.  
-A payment bug crashes everything.  
-Deployments become risky.
+Login and payment in one app.  
+Payment bug occurs.  
+Entire app crashes.  
+Scaling affects all modules.  
+Deployment risky.
 
 ---
 
 ### Microservices Architecture
 **About the Topic**  
-Microservices architecture splits an application into independent services. Each service handles a specific business capability. Services can scale independently. Fault isolation improves reliability. Operational complexity increases.
+Microservices split features into services. Each service is independent. Scales separately. Better fault isolation. Higher complexity.
 
 **Key Points**
-- Independent services  
-- Separate scaling  
-- Fault isolation  
-- Faster deployments  
-- Higher operational overhead  
+- Independent services
+- Separate scaling
+- Fault isolation
+- Faster deploys
+- Ops complexity
 
 **Example**  
-Order and payment services run separately.  
-Payment traffic spikes independently.  
-Only payment service scales.  
-Order service remains stable.  
-System resilience improves.
+Payment service spikes.  
+Only payment scales.  
+Order service stable.  
+Failure isolated.  
+System resilient.
 
 ---
 
 ### Message Queue
 **About the Topic**  
-Message queues enable asynchronous communication between services. Producers send messages without waiting for processing. Consumers process messages independently. This decouples systems. Queues absorb traffic spikes.
+Message queues enable async communication. Producers send messages. Consumers process later. Improves reliability. Handles spikes.
 
 **Key Points**
-- Asynchronous processing  
-- Decouples services  
-- Handles spikes  
-- Improves reliability  
-- Event-driven design  
+- Async processing
+- Decoupling
+- Spike handling
+- Reliability
+- Event-driven
 
 **Example**  
-Order service sends a message to a queue.  
-User gets instant confirmation.  
-Email service processes later.  
-System remains responsive.  
-Failures do not cascade.
+Order placed.  
+Message sent to queue.  
+User gets instant response.  
+Email sent later.  
+System responsive.
 
 ---
 
 ### API Gateway
 **About the Topic**  
-An API Gateway acts as a single entry point for client requests. It handles authentication and authorization. Rate limiting is enforced centrally. Requests are routed to backend services. Client complexity is reduced.
+API Gateway is single entry point. Handles auth and routing. Applies rate limits. Simplifies clients. Centralizes control.
 
 **Key Points**
-- Single entry point  
-- Centralized security  
-- Rate limiting  
-- Request routing  
-- Simplifies clients  
+- Single entry
+- Auth handling
+- Rate limiting
+- Routing
+- Client simplicity
 
 **Example**  
-Mobile app sends requests to gateway.  
-Gateway validates authentication tokens.  
-Rate limits are applied.  
-Requests are routed correctly.  
-Backend services remain protected.
+App calls gateway.  
+Gateway validates token.  
+Routes request.  
+Applies limits.  
+Backend protected.
+
+---
+
+## SECTION 2 – SYSTEM QUALITIES
+
+### Scalability
+**About the Topic**  
+Scalability defines growth handling. Systems must grow without failure. Requires planning. Linked to architecture. Critical for success.
+
+**Key Points**
+- Growth support
+- Architectural
+- Prevents crashes
+- Long-term
+- Business critical
+
+**Example**  
+Users increase daily.  
+Traffic spikes occur.  
+System scales horizontally.  
+No downtime seen.  
+Growth sustained.
+
+---
+
+### Availability
+**About the Topic**  
+Availability is uptime. High availability minimizes downtime. Uses redundancy. Failover mechanisms help. Measured in percentages.
+
+**Key Points**
+- Uptime focused
+- Redundancy
+- Failover
+- User trust
+- Business impact
+
+**Example**  
+One server fails.  
+Traffic rerouted.  
+Users unaffected.  
+System stays online.  
+Availability maintained.
+
+---
+
+### Consistency
+**About the Topic**  
+Consistency ensures data correctness. Distributed systems struggle with it. Trade-offs exist. Business decides model. Impacts UX.
+
+**Key Points**
+- Data accuracy
+- Distributed challenge
+- Trade-offs
+- Business driven
+- CAP related
+
+**Example**  
+User updates data.  
+Some nodes lag.  
+System syncs later.  
+Consistency achieved.  
+Model defines behavior.
+
+---
+
+### Strong Consistency
+**About the Topic**  
+Strong consistency shows latest data always. No stale reads. Slower systems. Used in finance. Accuracy critical.
+
+**Key Points**
+- Immediate accuracy
+- No stale reads
+- Slower
+- Banking systems
+- High reliability
+
+**Example**  
+Bank transfer occurs.  
+Balance updates instantly.  
+All users see same data.  
+No delay allowed.  
+Consistency enforced.
+
+---
+
+### Eventual Consistency
+**About the Topic**  
+Eventual consistency allows delay. Data syncs later. Improves performance. Used in social apps. Temporary mismatch acceptable.
+
+**Key Points**
+- Temporary inconsistency
+- High performance
+- Scalable
+- Social feeds
+- Distributed friendly
+
+**Example**  
+Post created.  
+Some users see later.  
+Data propagates.  
+Eventually synced.  
+UX acceptable.
+
+---
+
+### Fault Tolerance
+**About the Topic**  
+Fault tolerance allows operation during failures. Failures are expected. Uses redundancy. Prevents total outage. Improves reliability.
+
+**Key Points**
+- Failure handling
+- Redundancy
+- High reliability
+- Graceful degradation
+- Distributed systems
+
+**Example**  
+Server crashes.  
+Others continue.  
+Traffic rerouted.  
+System alive.  
+Users unaffected.
+
+---
+
+### SPOF
+**About the Topic**  
+Single Point of Failure causes full outage. One component fails system. Must be removed. Redundancy fixes SPOF. Critical design concern.
+
+**Key Points**
+- One failure risk
+- System outage
+- Must eliminate
+- Redundancy needed
+- Reliability issue
+
+**Example**  
+Single DB used.  
+DB crashes.  
+System goes down.  
+Replica added.  
+SPOF removed.
+
+---
+
+### IP Address
+**About the Topic**  
+IP address identifies devices. Enables network communication. Used for routing. IPv4 and IPv6 exist. Fundamental to networking.
+
+**Key Points**
+- Unique identifier
+- Network routing
+- IPv4/IPv6
+- Internet core
+- Device addressing
+
+**Example**  
+Server assigned IP.  
+Client sends request.  
+Router forwards traffic.  
+Server receives packet.  
+Communication succeeds.
+
+---
+
+### DNS
+**About the Topic**  
+DNS maps domain names to IPs. Improves usability. Distributed system. Cached globally. Critical internet service.
+
+**Key Points**
+- Name resolution
+- Human friendly
+- Distributed
+- Cached
+- Internet backbone
+
+**Example**  
+User types domain.  
+DNS resolves IP.  
+Browser connects.  
+Server responds.  
+Page loads.
+
+---
+
+### Client–Server Relationship
+**About the Topic**  
+Relationship follows request-response. Client initiates. Server responds. Stateless in modern APIs. Scales easily.
+
+**Key Points**
+- Request-response
+- Client initiated
+- Stateless
+- Scalable
+- HTTP based
+
+**Example**  
+Client sends request.  
+Server processes.  
+Response returned.  
+Connection closes.  
+Next request independent.
+
+---
+
+## SECTION 3 – PROTOCOLS
+
+### TCP
+**About the Topic**  
+TCP ensures reliable delivery. Maintains order. Retransmits lost packets. Slower but accurate. Used for critical data.
+
+**Key Points**
+- Reliable
+- Ordered
+- Error correction
+- Slower
+- Connection based
+
+**Example**  
+File download starts.  
+Packets sent.  
+Loss detected.  
+Packets resent.  
+File intact.
+
+---
+
+### UDP
+**About the Topic**  
+UDP is connectionless. No guarantee of delivery. Very fast. Used for real-time apps. Loss acceptable.
+
+**Key Points**
+- Fast
+- No reliability
+- Low latency
+- Connectionless
+- Real-time use
+
+**Example**  
+Video stream starts.  
+Packets sent quickly.  
+Some lost.  
+Video continues.  
+Latency minimal.
+
+---
+
+### HTTP
+**About the Topic**  
+HTTP is stateless protocol. Request-response based. Foundation of web. Simple. Widely supported.
+
+**Key Points**
+- Stateless
+- Web standard
+- Request-response
+- Simple
+- REST base
+
+**Example**  
+Browser sends request.  
+Server processes.  
+Response returned.  
+Connection closed.  
+Next request new.
+
+---
+
+### WebSocket
+**About the Topic**  
+WebSocket enables real-time communication. Persistent connection. Bidirectional. Low latency. Used in chat apps.
+
+**Key Points**
+- Persistent
+- Real-time
+- Bidirectional
+- Low latency
+- Event driven
+
+**Example**  
+Chat connection opened.  
+Messages sent instantly.  
+Server pushes updates.  
+No polling needed.  
+Real-time UX.
+
+---
+
+### Forward Proxy
+**About the Topic**  
+Forward proxy hides clients. Controls outbound traffic. Used in enterprises. Improves security. Enables filtering.
+
+**Key Points**
+- Client hiding
+- Outbound control
+- Security
+- Caching
+- Monitoring
+
+**Example**  
+Employee accesses web.  
+Request goes to proxy.  
+Proxy forwards request.  
+Response returned.  
+Client hidden.
+
+---
+
+### Reverse Proxy
+**About the Topic**  
+Reverse proxy hides servers. Handles inbound traffic. Used for load balancing. Improves security. Common with Nginx.
+
+**Key Points**
+- Server hiding
+- Inbound traffic
+- Load balancing
+- Security
+- Caching
+
+**Example**  
+Client hits proxy.  
+Proxy routes to backend.  
+Server hidden.  
+Response returned.  
+Security enforced.
+
+---
+
+## SECTION 4 – COMMUNICATION
+
+### REST API
+**About the Topic**  
+REST uses HTTP methods. Stateless design. Resource-based. Simple and scalable. Widely adopted.
+
+**Key Points**
+- Stateless
+- HTTP verbs
+- Resource based
+- Scalable
+- Simple
+
+**Example**  
+Client calls GET /users.  
+Server processes.  
+JSON returned.  
+Client renders.  
+Independent request.
+
+---
+
+### GraphQL
+**About the Topic**  
+GraphQL allows client-defined queries. Avoids over-fetching. Single endpoint. Flexible. Frontend optimized.
+
+**Key Points**
+- Client controlled
+- No over-fetching
+- Single endpoint
+- Flexible
+- Frontend friendly
+
+**Example**  
+Client requests name only.  
+Server returns only name.  
+Payload small.  
+Performance better.  
+Network optimized.
+
+---
+
+### gRPC
+**About the Topic**  
+gRPC is binary protocol. Uses HTTP/2. Fast communication. Strong typing. Used between services.
+
+**Key Points**
+- Binary
+- High performance
+- Strong typing
+- HTTP/2
+- Internal services
+
+**Example**  
+Service A calls Service B.  
+Binary data sent.  
+Low latency.  
+Fast response.  
+Efficient communication.
+
+---
+
+### Message Queues
+**About the Topic**  
+Queues enable async messaging. Decouple systems. Improve reliability. Handle spikes. Event-driven design.
+
+**Key Points**
+- Async
+- Decoupled
+- Reliable
+- Scalable
+- Event based
+
+**Example**  
+Event sent to queue.  
+Consumer processes later.  
+Producer not blocked.  
+System responsive.  
+Failure isolated.
+
+---
+
+## SECTION 5 – DATABASE & STORAGE
+
+### Relational (SQL) Database
+**About the Topic**  
+SQL databases use tables. Fixed schema. ACID transactions. Strong consistency. Used in finance.
+
+**Key Points**
+- Structured
+- ACID
+- Strong consistency
+- Relational
+- Reliable
+
+**Example**  
+Bank stores transactions.  
+Each transaction atomic.  
+Rollback on failure.  
+Data consistent.  
+System correct.
+
+---
+
+### Non-Relational (NoSQL) Database
+**About the Topic**  
+NoSQL uses flexible schema. Scales horizontally. High performance. Eventual consistency. Big data friendly.
+
+**Key Points**
+- Schema-less
+- Scalable
+- Fast
+- Distributed
+- Eventual consistency
+
+**Example**  
+Posts stored in NoSQL.  
+Schema evolves.  
+High traffic handled.  
+Delay acceptable.  
+System scales.
+
+---
+
+### SQL vs NoSQL
+**About the Topic**  
+SQL prioritizes consistency. NoSQL prioritizes scalability. Choice depends on use case. Trade-offs exist. Architecture decision.
+
+**Key Points**
+- Consistency vs scale
+- Schema vs flexibility
+- Use-case driven
+- CAP trade-off
+- Design choice
+
+**Example**  
+Payments use SQL.  
+Feeds use NoSQL.  
+Different needs.  
+Different systems.  
+Correct choices made.
+
+---
+
+### Object Storage
+(refer Section 1)
+
+### Cache
+(refer Section 1)
+
+### CDN
+(refer Section 1)
+
+---
+
+## SECTION 6 – CACHING
+
+### Read-Aside Cache
+**About the Topic**  
+Application checks cache first. On miss, DB queried. Cache updated. Simple pattern. Widely used.
+
+**Key Points**
+- Cache first
+- DB fallback
+- Lazy loading
+- Simple
+- Common
+
+**Example**  
+Request checks cache.  
+Cache miss.  
+DB queried.  
+Cache updated.  
+Next request fast.
+
+---
+
+### Write-Through Cache
+**About the Topic**  
+Writes go to cache and DB. Cache always updated. Strong consistency. Slower writes. Simple logic.
+
+**Key Points**
+- Cache always fresh
+- DB updated
+- Strong consistency
+- Slower writes
+- Simple reads
+
+**Example**  
+Update request received.  
+Cache updated first.  
+DB updated next.  
+Reads hit cache.  
+Consistent data.
+
+---
+
+### Read & Write Cache Strategies
+**About the Topic**  
+Systems combine strategies. Read-heavy uses read-aside. Write-heavy uses write-through. Choice depends on access pattern. Impacts performance.
+
+**Key Points**
+- Strategy based
+- Access pattern driven
+- Performance impact
+- Consistency trade-off
+- Design choice
+
+**Example**  
+Product catalog read-heavy.  
+Read-aside used.  
+User profile write-heavy.  
+Write-through used.  
+System optimized.
+
+---
+
+## SECTION 7 – UTILS
+
+### Cloud
+**About the Topic**  
+Cloud provides on-demand resources. Scales easily. Pay-as-you-go. High availability. Managed services.
+
+**Key Points**
+- On-demand
+- Scalable
+- Cost efficient
+- Managed infra
+- Global reach
+
+**Example**  
+Server created on demand.  
+Traffic increases.  
+Auto-scaling triggered.  
+Cost optimized.  
+System scales.
+
+---
+
+### Logging & Monitoring
+**About the Topic**  
+Logging records events. Monitoring tracks metrics. Alerts detect failures. Critical for ops. Improves reliability.
+
+**Key Points**
+- Visibility
+- Debugging
+- Alerting
+- Metrics
+- Reliability
+
+**Example**  
+Error logged.  
+Alert triggered.  
+Engineer notified.  
+Issue fixed quickly.  
+Downtime minimized.
+
+---
+
+### Hashing
+**About the Topic**  
+Hashing converts input to fixed output. Used for security. Fast lookup. Irreversible. Used in passwords.
+
+**Key Points**
+- Fixed size
+- One-way
+- Fast
+- Secure
+- Distributed systems
+
+**Example**  
+Password hashed.  
+Stored securely.  
+Login compares hash.  
+Original hidden.  
+Security ensured.
+
+---
+
+### Consistent Hashing
+**About the Topic**  
+Consistent hashing distributes keys evenly. Minimizes rebalancing. Used in caches. Scales well. Distributed friendly.
+
+**Key Points**
+- Even distribution
+- Minimal movement
+- Cache friendly
+- Scalable
+- Distributed
+
+**Example**  
+Cache nodes added.  
+Few keys remapped.  
+Most cache preserved.  
+Performance stable.  
+Scales smoothly.
+
+---
+
+### CAP Theorem
+**About the Topic**  
+CAP states only two of C, A, P possible. Trade-offs unavoidable. Guides design. Distributed systems only. Critical concept.
+
+**Key Points**
+- C vs A trade-off
+- Partition tolerance required
+- Design constraint
+- Distributed systems
+- Architecture guide
+
+**Example**  
+Bank chooses consistency.  
+Feed chooses availability.  
+Partition occurs.  
+System behaves as designed.  
+CAP explains behavior.
+
+---
+
+### Database Indexing
+**About the Topic**  
+Indexing speeds up queries. Uses extra data structures. Improves read performance. Increases write cost. Essential for DBs.
+
+**Key Points**
+- Faster reads
+- Extra storage
+- Write overhead
+- Query optimization
+- DB performance
+
+**Example**  
+Email column indexed.  
+Search faster.  
+Insert slightly slower.  
+Query optimized.  
+Performance improved.
+
+---
+
+### Capacity Estimation
+**About the Topic**  
+Capacity estimation predicts resource needs. Prevents outages. Controls cost. Done early. Interview critical.
+
+**Key Points**
+- Traffic prediction
+- Resource planning
+- Cost control
+- Prevent outages
+- Design phase
+
+**Example**  
+DAU estimated.  
+Requests calculated.  
+Servers provisioned.  
+System handles load.  
+No downtime.
+
+---
+
+### Event Streaming
+**About the Topic**  
+Event streaming processes real-time events. Producers emit events. Consumers react. Scales well. Used in analytics.
+
+**Key Points**
+- Real-time
+- Async
+- Scalable
+- Event driven
+- Analytics friendly
+
+**Example**  
+User action emitted.  
+Event streamed.  
+Analytics consumes.  
+Dashboard updates.  
+Insights generated.
 
 ---
 
