@@ -1110,7 +1110,7 @@ Event streaming processes continuous streams of events in real time. Producers e
 - Scales well with high event volume.
 - Commonly used for analytics and monitoring.
 
-### Examples
+### Example
 User actions are published as events to a stream.  
 Analytics services consume these events in real time.  
 Dashboards update instantly with new data.  
