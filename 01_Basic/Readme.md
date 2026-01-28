@@ -1103,14 +1103,14 @@ This example shows the value of capacity planning.
 ### About the Topic
 Event streaming processes continuous streams of events in real time. Producers emit events as they occur. Consumers process events independently and asynchronously. This model supports real-time analytics and reactive systems. Event streaming is common in modern data-driven architectures.
 
-### Key Points
+### Key Points:
 - Processes events in real time.
 - Supports asynchronous communication.
 - Enables reactive system design.
 - Scales well with high event volume.
 - Commonly used for analytics and monitoring.
 
-### Example
+### Example:
 User actions are published as events to a stream.  
 Analytics services consume these events in real time.  
 Dashboards update instantly with new data.  
