@@ -118,7 +118,7 @@ This is the heart of any cab booking system.
   - Neighboring GeoHashes
 - Filters drivers with status = ONLINE.
 
-### Step 3: Rank Drivers
+### Step 3: Rank Drivers:
 Drivers are ranked based on:
 - Distance from pickup
 - Estimated time of arrival (ETA)
