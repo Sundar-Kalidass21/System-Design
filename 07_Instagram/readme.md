@@ -263,5 +263,5 @@ Design a social media platform like Instagram that allows users to upload photos
 
 ---
 
-## Summary
+## Summary:
 This Instagram system design focuses on high availability, massive read scalability, efficient feed generation, and reliable media delivery. The architecture balances performance and consistency using caching, asynchronous processing, and hybrid feed generation strategies.
